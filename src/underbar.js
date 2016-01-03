@@ -192,7 +192,7 @@ _.first = function(array, n){
 
   // Return all elements of an array that pass a truth test.
 
-//function should take in a collection(array or an object) and a function that tests for truth as arguments
+//function should take in a collection(array or an object) and a test function as arguments
     _.filter = function(collection, test) {
     //create an array to store the values that pass the truth test
     var filterList = [];
@@ -217,26 +217,15 @@ _.first = function(array, n){
 */
 
   // Return all elements of an array that don't pass a truth test.
-  
-  /*
-  _.reject = function(collection, test) {
+
+//function should take in a collection(array or an object) and a test function as arguments
+  _.reject = function(collection, test){
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-  var rejectList = [];
-    _.filter(collection, 
-      _.each(collection, function(val, i, list){
-        if(list[i] !== collection[i]){
-          rejectList.push(collection[i]);
-        }
-    });
-    return rejectList;
-  )};
 
-  };
-  */
-
-  _.reject = function(collection, test){
-    return _.filter(collection, function(val){
+    //iterate through the collection, return the new array 
+    return _.filter(collection, function(val){ 
+      //that only has the values that do NOT pass the test
       return ! test(val);
     });
   };
