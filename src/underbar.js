@@ -347,20 +347,23 @@ _.first = function(array, n){
 - not invoke the iterator on the first element when using it as an accumulator
 */
 
+//function should take in a collection(array or an object), iterator, and an accumulator as arguments
 _.reduce = function(collection, iterator, accumulator){
+  //if no accumulator argument is passed
+  if(accumulator === undefined){
+    //then the accummulator equals the first element in the collection
+    accumulator = collection.shift();
+  }
 
-var initializing = arguments.length === 2;
-  _.each(collection, function(value){
-     if(initializing){
-        accumulator = value;
-        initializing = false;
-      }else{
-          accumulator = iterator(accumulator, value);  
-      }
+  //iterate through the collection
+  _.each(collection, function(val){
+    //accumulator will repetitively equal the iterator called with the accumulator and value for each value in the collection 
+        //accumulator should equal the return value of the previous iterator call
+    accumulator = iterator(accumulator, val);
   });
 
-return accumulator;
-
+  //return accumulator
+  return accumulator;
 };
 
   
