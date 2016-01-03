@@ -7,9 +7,10 @@
   // seem very useful, but remember it--if a function needs to provide an
   // iterator when the user does not pass one in, this will be handy.
   
-
-  _.identity = function(val) { //pass in a value as the argument
-    return val; //return the value passed
+  //function should take in a value as the argument
+  _.identity = function(val) { 
+    //return the value passed
+    return val;
   };
 
   
@@ -110,16 +111,33 @@ _.first = function(array, n){
   // iterator function over each item in the input collection.
   
 
+/* Each should:
+- iterate over arrays, providing access to element, index, and array itself
+    for(var i = 0; i < array.length; i++){
+      iterator(array[i], i, array);
+    }
+- only iterate over the array elements, not properties of the array
+    array[i] - array elements
+- iterate over objects, providing access to the element, index, and object itself
+    for(var key in object){
+      iterator(object[key], key, object);  
+    }
+*/
 
-
-
+//function should take in a collection(array or object) and an iterator
   _.each = function(collection, iterator){
+    //if the collection is an array
     if(Array.isArray(collection)){ 
+      //loop through the array, iterate using a counter (i)
       for(var i = 0; i < collection.length; i++){
+        //at each element in the array, call the iterator on the element, index, and array itself
         iterator(collection[i], i, collection);
       }
+    //otherwise, if the collection is an object
     }else{ 
+      //loop through the object, iterate over its keys(properties)
       for(var key in collection){
+        //at each element in the object, call the iterator on the value, property, and object itself
         iterator(collection[key], key, collection);
       }
     }
