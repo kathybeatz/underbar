@@ -48,7 +48,7 @@
       
   */
 
-//function should take in an array and an index argument
+//function should take in an array and an index as arguments
   _.first = function(array, n) { 
     //if no index argument is passed
     if(n === undefined){
@@ -87,7 +87,7 @@ _.first = function(array, n){
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
 
-  //function should take in an array and an index argument
+  //function should take in an array and an index as arguments
   _.last = function(array, n) {
   // if no index argument is passed
     if(n === undefined){
@@ -124,18 +124,18 @@ _.first = function(array, n){
     }
 */
 
-//function should take in a collection(array or object) and an iterator
+//function should take in a collection(array or object) and an iterator as arguments
   _.each = function(collection, iterator){
     //if the collection is an array
     if(Array.isArray(collection)){ 
-      //loop through the array, iterate using a counter (i)
+      //loop through the array using a for-i loop
       for(var i = 0; i < collection.length; i++){
         //at each element in the array, call the iterator on the element, index, and array itself
         iterator(collection[i], i, collection);
       }
     //otherwise, if the collection is an object
     }else{ 
-      //loop through the object, iterate over its keys(properties)
+      //loop through the object using a for-in loop
       for(var key in collection){
         //at each element in the object, call the iterator on the value, property, and object itself
         iterator(collection[key], key, collection);
@@ -144,49 +144,77 @@ _.first = function(array, n){
   };
  
 
+
+/* indexOf should:
+- find 40 in the list
+- be able to compute indexOf even when the native function is defined
+- returns -1 when the target cannot be found in the list
+- returns the first index that the target can be found at when there are multiple matches
+*/
+
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
+
+//function should take in an array and a target(item you are looking for) as arguments
   _.indexOf = function(array, target){
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
+    
+    //initialize the result to be a falsey state (negative number)
     var result = -1;
 
+    //iterate over the array
     _.each(array, function(item, index) {
-      if (item === target && result === -1) {
+      //if the item(element) in the array matches the target
+          // result === -1, allows for the first index that the target can be found at when there are multiple matches
+      if (item === target && result === -1) { 
+        //change result from a falsey state to the index of that element
         result = index;
-      }
+      } 
+      //result will remain false if the item does not match the target
     });
 
+    //return the result
     return result;
+        //returns -1 when the target is not found in the list
+        //returns the first index that the target can be found at
   };
+
+
+
+
+/* Filter should:
+- return all the even numbers in an array
+- return all the odd numbers in an array
+- should produce a brand new array instead of modifying the input array
+*/
 
   // Return all elements of an array that pass a truth test.
 
-  /*
-  _.filter = function(collection, test) {
-    var filterList = [];
-    for(var i = 0; i < collection.length; i++){
-      if( test(collection[i]) === true ){
-        filterList.push(collection[i]);
-      } 
-    }
-    return filterList;
-  };
-  */
-
+//function should take in a collection(array or an object) and a function that tests for truth as arguments
     _.filter = function(collection, test) {
+    //create an array to store the values that pass the truth test
     var filterList = [];
+      //iterate over the collection
       _.each(collection, function(val){ 
+        //if the element passes the truth test
         if( test(val) ){
+          //put that element in the array that stores values that pass the truth test
           filterList.push(val);
         } 
       });
+    //return the array storing all the values that pass the truth test
     return filterList;
     };
     
 
   
+/* Reject should:
+- reject all even numbers
+- rejeect all odd numbers
+- produce a brand new array instead of modifying the input array
+*/
 
   // Return all elements of an array that don't pass a truth test.
   
@@ -215,7 +243,11 @@ _.first = function(array, n){
 
 
 
-
+/* Uniq should: 
+- return all unique values contained in an unsorted array
+- handle iterators that work with a sorted array
+- produce a brand new array instead of modifying the input array
+*/
 
   // Produce a duplicate-free version of the array.
   /*
@@ -262,6 +294,12 @@ _.first = function(array, n){
 */
 
 
+
+/* Map should:
+- apply a function to every value in an array
+- produce a brand new array instead of modifying the input array
+*/
+
   _.map = function(collection, iterator){
     var newArr = [];
     _.each(collection, function(val, i, list){
@@ -279,8 +317,10 @@ _.first = function(array, n){
 
 
 
-
-
+/* Pluck should:
+- return values contained at a user-defined property
+- not modify the original array
+*/
 
   // Takes an array of objects and returns and array of the values of
   // a certain property in it. E.g. take an array of people and return
@@ -293,6 +333,9 @@ _.first = function(array, n){
       return item[key];
     });
   };
+
+
+
 
   // Reduces an array or object to a single value by repetitively calling
   // iterator(accumulator, item) for each item. accumulator should be
@@ -315,6 +358,15 @@ _.first = function(array, n){
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   
+
+
+/* Reduce should:
+- be able to sum up an array
+- use the first element as an accumulator when none is given
+- invoke the iterator on the first element when given an accumulator
+- not invoke the iterator on the first element when using it as an accumulator
+*/
+
 _.reduce = function(collection, iterator, accumulator){
 
 var initializing = arguments.length === 2;
