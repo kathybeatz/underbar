@@ -35,26 +35,28 @@
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
 
-  /* 
-  - should be able to pull out the first element of an array
+  /* First should:
+  - be able to pull out the first element of an array
       array[0] - first element of the array
-  - should accept an index argument
+  - accept an index argument
       function(array, n) - n equals index argument
-  - should return empty array if zero is passed in as the index
+  - return empty array if zero is passed in as the index
+      array.slice(0,n)
+  - return all the array's elements if the index argument is larger than the length of the array
+      array.slice(0,n)
       
-  - should return all the array's elements if the index argument is larger than the length of the array
-
   */
 
 //function should take in an array and an index argument
   _.first = function(array, n) { 
-//if no index argument is passed
+    //if no index argument is passed
     if(n === undefined){
-    //return the first element in the array
+      //return the first element in the array
       return array[0];
-//when an index argument is passed, return the same number of elements from the beginning
-      //(when 0 - return emtpy array, when index passed is larger than the length of the array - return all array elements)
+    //when an index argument is passed
     }else{
+      //return the same number of elements from the beginning
+      //(when n = 0 - return empty array, when index passed is larger than the length of the array - return all array elements)
       return array.slice(0, n);
     }
   };
@@ -66,25 +68,40 @@ _.first = function(array, n){
   return n === undefined ? array[0] : array.slice(0,n);
 };
 
+
+
+/* Last should:
+- pull the last element from an array
+    array[array.length-1]
+- accept an index argument
+    function(array, n) - n equals index argument
+- return empty array if zero is passed in as the index
+    array.slice(0,n)
+- return all the array's elements if the index is larger than the length of the array
+    array.slice(Math.max(0, array.length -n))
+    
+
 */
 
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
-  _.last = function(array, n) {
-    return n === undefined ? array[array.length-1] : array.slice(Math.max(0, array.length -n));
-  };
 
-  /* My implementation:
+  //function should take in an array and an index argument
   _.last = function(array, n) {
+  // if no index argument is passed
     if(n === undefined){
+      //return the last element in the array
       return array[array.length-1];
-    }else if (n < array.length){
-      return array.slice(array.length-n,array.length+1);
-    }else {
-      return array;
+  // when an index argument is passed
+    }else{
+      // return the same number of elements starting from the end of the array
+      // (when n = 0 - return empty array, when index passed is larger than the length of the array - return all array elements)
+      return array.slice(Math.max(0, array.length - n)); 
+          //Math.max utilized in order to negate the negative value that would be created when an index that is passed is larger than the array length
+              //array.slice(0) - return entire array
     }
   };
-  */
+
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
@@ -94,12 +111,14 @@ _.first = function(array, n){
   
 
 
+
+
   _.each = function(collection, iterator){
     if(Array.isArray(collection)){ 
       for(var i = 0; i < collection.length; i++){
         iterator(collection[i], i, collection);
       }
-    }else{ // else if(typeof collection === 'object') , else{
+    }else{ 
       for(var key in collection){
         iterator(collection[key], key, collection);
       }
