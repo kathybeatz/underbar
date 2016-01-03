@@ -6,10 +6,13 @@
   // Returns whatever value is passed as the argument. This function doesn't
   // seem very useful, but remember it--if a function needs to provide an
   // iterator when the user does not pass one in, this will be handy.
-  _.identity = function(val) {
-    return val;
+  
+
+  _.identity = function(val) { //pass in a value as the argument
+    return val; //return the value passed
   };
 
+  
   /**
    * COLLECTIONS
    * ===========
@@ -31,15 +34,46 @@
 
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
-  _.first = function(array, n) {
-    return n === undefined ? array[0] : array.slice(0, n);
+
+  /* 
+  - should be able to pull out the first element of an array
+      array[0] - first element of the array
+  - should accept an index argument
+      function(array, n) - n equals index argument
+  - should return empty array if zero is passed in as the index
+      
+  - should return all the array's elements if the index argument is larger than the length of the array
+
+  */
+
+//function should take in an array and an index argument
+  _.first = function(array, n) { 
+//if no index argument is passed
+    if(n === undefined){
+    //return the first element in the array
+      return array[0];
+//when an index argument is passed, return the same number of elements from the beginning
+      //(when 0 - return emtpy array, when index passed is larger than the length of the array - return all array elements)
+    }else{
+      return array.slice(0, n);
+    }
   };
+
+  
+/* _.first shorthand:
+
+_.first = function(array, n){
+  return n === undefined ? array[0] : array.slice(0,n);
+};
+
+*/
 
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
     return n === undefined ? array[array.length-1] : array.slice(Math.max(0, array.length -n));
   };
+
   /* My implementation:
   _.last = function(array, n) {
     if(n === undefined){
@@ -282,10 +316,7 @@ return accumulator;
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
-    _.reduce(collection, function(item){
-    
-      }
-    })
+
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
