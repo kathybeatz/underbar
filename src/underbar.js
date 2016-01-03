@@ -124,7 +124,7 @@ _.first = function(array, n){
     }
 */
 
-//function should take in a collection(array or object) and an iterator as arguments
+//function should take in a collection(array or object) and an iterator function as arguments
   _.each = function(collection, iterator){
     //if the collection is an array
     if(Array.isArray(collection)){ 
@@ -257,34 +257,29 @@ _.first = function(array, n){
   };
 
 
+
   // Return the results of applying an iterator to each element.
 
   // map() is a useful primitive iteration function that works a lot
   // like each(), but in addition to running the operation on all
   // the members, it also maintains an array of results.
   
-/*
-  _.map = function(collection, iterator) {
-    var newArr = [];
-    for(var i = 0; i < collection.length; i++){ //need to replace with each
-      newArr.push( iterator(collection[i]) );
-    }
-    return newArr;
-  };
-*/
-
-
 
 /* Map should:
 - apply a function to every value in an array
 - produce a brand new array instead of modifying the input array
 */
 
+//function should take in a collection(array or an object) and an iterator function as arguments
   _.map = function(collection, iterator){
+    //create a new array that stores the results each time the iterator is called
     var newArr = [];
-    _.each(collection, function(val, i, list){
-      newArr.push(iterator(val, i,list));
+    //iterate through the collection and
+    _.each(collection, function(val){
+      //store the results of the iterator being called upon with each element in the collection
+      newArr.push(iterator(val);
     })
+    //return the new array 
     return newArr;
   };
 
