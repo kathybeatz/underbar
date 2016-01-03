@@ -277,9 +277,9 @@ _.first = function(array, n){
     //iterate through the collection and
     _.each(collection, function(val){
       //store the results of the iterator being called upon with each element in the collection
-      newArr.push(iterator(val);
-    })
-    //return the new array 
+      newArr.push(iterator(val));
+    });
+    //return the new array storing the results of theiterator when called
     return newArr;
   };
 
@@ -300,11 +300,16 @@ _.first = function(array, n){
   // Takes an array of objects and returns and array of the values of
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
+
+//function should take in an array of objects and a key as arguments
   _.pluck = function(collection, key) {
     // TIP: map is really handy when you want to transform an array of
     // values into a new array of values. _.pluck() is solved for you
     // as an example of this.
+
+    //iterate through the collection and return an array (_.map returns a new modified array)
     return _.map(collection, function(item){
+      //of the values of a certain property
       return item[key];
     });
   };
