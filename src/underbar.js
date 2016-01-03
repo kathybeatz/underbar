@@ -223,7 +223,7 @@ _.first = function(array, n){
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
 
-    //iterate through the collection, return the new array 
+    //filter the collection, return the new array 
     return _.filter(collection, function(val){ 
       //that only has the values that do NOT pass the test
       return ! test(val);
@@ -239,31 +239,22 @@ _.first = function(array, n){
 */
 
   // Produce a duplicate-free version of the array.
-  /*
+
+//function should take in an array as an argument
   _.uniq = function(array) {
-    var results = [];
-    for (var i = 0; i < array.length; i++){
-      if( results.indexOf(array[i]) < 0 ){
-        results.push(array[i]);
+    //create an array to store all the unique values
+    var unique = [];
+    //iterate through the array
+    _.each(array, function(val){
+      //if the value is not found in the unique array (negative value will arise from _.indexOf if the target is not found --> -1)
+      if( _.indexOf(unique, val) < 0 ){ 
+        //put that element in the unique array
+        unique.push(val);
       }
-    }
-    return results;
+    });
+    //return the unique array
+    return unique;
   };
-  */
-
-//quadratic time complexity, solution with breadcrumbing 
-  _.uniq = function(array){
-    var unique = {};
-    var results = [];
-    for(var i = 0; i < array.length; i++){
-      unique[array[i]] = array[i];
-    }
-    for (var key in unique){
-      results.push(unique[key]);
-    }
-    return results;
-  };
-
 
 
   // Return the results of applying an iterator to each element.
