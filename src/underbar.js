@@ -368,20 +368,32 @@ _.reduce = function(collection, iterator, accumulator){
 
   
 
-
-
+/* Contains should:
+- return false if a collection does not contain a user-specified value
+- return true if a collection contains a user-specified value
+- work on objects
+*/
 
 
   // Determine if the array or object contains a given value (using `===`).
+
+//function should take in a collection(array or an object) and a target(item you are looking for)
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
+
+    //Iterate through the collection, will ultimately return true or false
     return _.reduce(collection, function(wasFound, item) {
-      if (wasFound) {
+      //If the base case alters to true
+      if (wasFound) { //will remain true throughout iteration of entire collection
+        //return true
         return true;
       }
+      //Check each item in the collection against the target, return true or false
       return item === target;
+       //Set base case to false(accumulator)
     }, false);
+
   };
 
 
