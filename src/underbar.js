@@ -279,7 +279,7 @@ _.first = function(array, n){
       //store the results of the iterator being called upon with each element in the collection
       newArr.push(iterator(val));
     });
-    //return the new array storing the results of theiterator when called
+    //return the new array storing the results of the iterator when called
     return newArr;
   };
 
@@ -397,11 +397,26 @@ _.reduce = function(collection, iterator, accumulator){
   };
 
 
+/* Every should:
+- passes by default for an empty collection
+- passes for a collection of all-truthy results
+- fails for a collection of all-falsy results
+- fails for a collection containing mixed falsy and truthy results
+- work when provided a collection containing undefined values
+- cast the result to a boolean
+- handle callbacks that manipulate the input
+- work when no callback is provided
+*/
+
+
   // Determine whether all of the elements match a truth test.
+
+//function should take in a collection(array or an object) and an iterator function
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
 
   };
+
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
@@ -428,7 +443,19 @@ _.reduce = function(collection, iterator, accumulator){
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
+
+//function should be able to take in multiple objects
   _.extend = function(obj) {
+    //iterate through the arguments
+    for(var i = 0; i < arguments.length; i++){
+      //iterate through each of the objects (in arguments)
+      for(var key in arguments[i]){
+        //access each of the properties in the objects inputed and add them to the first object argument
+        obj[key] = arguments[i][key];
+      }
+    }
+    //return newly extended object
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
