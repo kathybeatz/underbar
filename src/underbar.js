@@ -414,6 +414,13 @@ _.reduce = function(collection, iterator, accumulator){
 //function should take in a collection(array or an object) and an iterator function
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+  //set base case to true
+  //iterate through the collection 
+    //check each item in the collection against the iterator 
+      //if an item fails the test
+        //change the base case to false
+
+
 
   };
 
@@ -458,9 +465,34 @@ _.reduce = function(collection, iterator, accumulator){
     return obj;
   };
 
+
+
+/* Defaults should:
+- return the first argument
+- copy a property if that key is not already set on the target
+- not copy a property if that key is already set on the target, even if the value for that key is falsy
+- prefers the first value found when two objects are provided with properties at the same key
+*/
+
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
+  
+//function should be able to take in multiple objects
   _.defaults = function(obj) {
+    //iterate through the arguments
+    for(var i = 0; i < arguments.length; i++){
+      //iterate through each of the objects (in arguments)
+      for(var key in arguments[i]){
+        //if the property does not exist in the object
+        if(obj[key] === undefined){
+          //then add that property to the object with its attached value
+          obj[key] = arguments[i][key];
+        }
+      }
+    }
+
+    //return the newly updated object
+    return obj;
   };
 
 
