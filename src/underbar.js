@@ -477,7 +477,7 @@ _.reduce = function(collection, iterator, accumulator){
     });
     //return the result
     return result;
-    
+
   };
 
 
@@ -599,34 +599,30 @@ _.reduce = function(collection, iterator, accumulator){
   // already computed the result for the given argument and return that value
   // instead if possible.
 
-/* input - add = function(a,b){
-  return a + b;
-};
-
-return 
-*/
-
 
 
 //function should take in a function
   _.memoize = function(func) {
-    var alreadyCalled = false;
-    var result;
-
-    return function(){
-
-      if(!alreadyCalled){
-        result = func.apply(this, arguments);
-        alreadyCalled = true;
+    //create an object to store the results of func when invoked with different arguments
+    var results = {};
+    //return a function
+    return function() {
+      //create an array to store the arguments
+      var argKey = [];
+      //loops through the arguments passed in the function
+      for(var i = 0; i < arguments.length; i ++) {
+        //add the arguments to the array that will contain the arguments passed
+        argKey.push(arguments[i]);
       }
-      return result;
-    };
-
-    
-
+      //if the function did not get called with a certain argument
+      if (results[argKey] === undefined) {
+        //then assign the return value from the function called with that argument to a key
+        results[argKey]=func.apply(this, arguments);
+      }
+      //return the result for the given key
+      return results[argKey];
+    }
   };
-
-
 
 /* Delay should:
 - only execute the function after the specified wait time
