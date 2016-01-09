@@ -609,7 +609,7 @@ _.reduce = function(collection, iterator, accumulator){
     return function() {
       //create an array to store the arguments
       var argKey = [];
-      //loops through the arguments passed in the function
+      //iterate through the arguments passed in the function
       for(var i = 0; i < arguments.length; i ++) {
         //add the arguments to the array that will contain the arguments passed
         argKey.push(arguments[i]);
@@ -624,6 +624,8 @@ _.reduce = function(collection, iterator, accumulator){
     }
   };
 
+
+
 /* Delay should:
 - only execute the function after the specified wait time
 - have successfully passed function arguments in 
@@ -637,7 +639,18 @@ _.reduce = function(collection, iterator, accumulator){
   // call someFunction('a', 'b') after 500ms
   
 
+//function should take in a function, and a given amount of time to wait in order to call that function
   _.delay = function(func, wait) {
+  //create an array to hold the arguments that will be passed into the input function
+  var argumentsList = [];
+  //iterate through the arguments (except func and wait)
+  for(var i = 2; i < arguments.length; i++){
+    //place those arguments in the arguments array container
+    argumentsList.push(arguments[i]);
+  }
+  //call the input function after the amount of time needed to wait with the arguments supplied
+  setTimeout(function(){ func.apply(this, argumentsList);}
+      , wait);
   };
 
 
