@@ -411,24 +411,53 @@ _.reduce = function(collection, iterator, accumulator){
 
   // Determine whether all of the elements match a truth test.
 
-//function should take in a collection(array or an object) and an iterator function
+//function should take in a collection(array or an object) and an iterator function that tests for true or false
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
-  //set base case to true
-  //iterate through the collection 
-    //check each item in the collection against the iterator 
-      //if an item fails the test
-        //change the base case to false
 
-
-
+    //set the base case to true
+    var result = true;
+    
+    //if the user does not provide an iterator
+    if(iterator === undefined){
+      //set the iterator to _.identity(return whatever value is passed to it)
+      iterator = _.identity;
+    }
+    //loop through the collection
+    _.each(collection, function(val){
+      //the iterator function will test each item in the collection
+      //and if a value in the collection does not pass the truth test
+      if(!iterator(val)){
+        //change the result to false
+        result = false;
+      }
+    });
+    //return the result
+    return result;
   };
 
 
+
+/* Some should:
+- fail by default for an empty collection
+- pass for a collection of all-truthy results
+- fail for a collection of all-falsy results
+- pass for a collection containing mixed falsy and truthy results
+- pass for a set containing one truthy value that is a string
+- should fail for a set containing no matching values
+- pass for a collection containing one matching value
+- cast the result to a boolean
+- work when no callback is provided
+*/
+
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
+  
+
+//function should take in a collection(array or an object) and an iterator function
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+
   };
 
 
@@ -504,6 +533,12 @@ _.reduce = function(collection, iterator, accumulator){
    * and return out a new version of the function that works somewhat differently
    */
 
+
+
+/* Once should:
+- only run a user-defined function if it hasn't been run before
+*/
+
   // Return a function that can be called at most one time. Subsequent calls
   // should return the previously returned value.
   _.once = function(func) {
@@ -527,6 +562,14 @@ _.reduce = function(collection, iterator, accumulator){
     };
   };
 
+
+
+/* Memoize should:
+- produce the same result as the non-memoized version
+- give different results for dfferent arguments
+- not run the memoized function twice for any given set of arguments
+*/
+
   // Memorize an expensive function's results by storing them. You may assume
   // that the function only takes primitives as arguments.
   // memoize could be renamed to oncePerUniqueArgumentList; memoize does the
@@ -535,8 +578,40 @@ _.reduce = function(collection, iterator, accumulator){
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
+
+/* input - add = function(a,b){
+  return a + b;
+};
+
+return 
+*/
+
+
+
+//function should take in a function
   _.memoize = function(func) {
+    var alreadyCalled = false;
+    var result;
+
+    return function(){
+
+      if(!alreadyCalled){
+        result = func.apply(this, arguments);
+        alreadyCalled = true;
+      }
+      return result;
+    };
+
+    
+
   };
+
+
+
+/* Delay should:
+- only execute the function after the specified wait time
+- have successfully passed function arguments in 
+*/
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
@@ -544,6 +619,8 @@ _.reduce = function(collection, iterator, accumulator){
   // The arguments for the original function are passed after the wait
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
+  
+
   _.delay = function(func, wait) {
   };
 
@@ -558,6 +635,13 @@ _.reduce = function(collection, iterator, accumulator){
   // TIP: This function's test suite will ask that you not modify the original
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
+ 
+/* Shuffle should:
+- not modify the original object
+- have the same elements as the original object
+- not be in the same order as the original object
+*/
+
   _.shuffle = function(array) {
   };
 
