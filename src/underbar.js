@@ -671,8 +671,32 @@ _.reduce = function(collection, iterator, accumulator){
 - not be in the same order as the original object
 */
 
+//function should take in an array
   _.shuffle = function(array) {
-  };
+
+  //create a copy of the inputted array
+  var arrayCopy = array.slice();
+  //set the current index to the length of the inputted array
+  var originalIndex = arrayCopy.length;
+  var temporaryValue;
+  var randomIndex;
+
+  //while there are elements that are still needed to be shuffled
+  while (0 !== originalIndex) {
+
+    //create new random indexes for the elements in the inputted array
+    randomIndex = Math.floor(Math.random() * originalIndex);
+    originalIndex -= 1;
+
+    //place the element from the original index in a new randomized index
+    temporaryValue = arrayCopy[originalIndex];
+    arrayCopy[originalIndex] = arrayCopy[randomIndex];
+    arrayCopy[randomIndex] = temporaryValue;
+  }
+
+  //return the shuffled array
+  return arrayCopy;
+}
 
 
   /**
