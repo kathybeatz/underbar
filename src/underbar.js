@@ -458,6 +458,26 @@ _.reduce = function(collection, iterator, accumulator){
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
 
+    //set the base case to false
+    var result = false;
+    
+    //if the user does not provide an iterator
+    if(iterator === undefined){
+      //set the iterator to _.identity(return whatever value is passed to it)
+      iterator = _.identity;
+    }
+    //loop through the collection
+    _.each(collection, function(val){
+      //the iterator function will test each item in the collection
+      //and if a value in the collection passes the truth test
+      if(iterator(val)){
+        //change the result to true
+        result = true;
+      }
+    });
+    //return the result
+    return result;
+    
   };
 
 
