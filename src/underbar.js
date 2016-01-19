@@ -727,12 +727,33 @@ _.reduce = function(collection, iterator, accumulator){
   _.zip = function() {
   };
 
+
   // Takes a multidimensional array and converts it to a one-dimensional array.
   // The new array should contain all elements of the multidimensional array.
   //
   // Hint: Use Array.isArray to check if something is an array
-  _.flatten = function(nestedArray, result) {
-  };
+ 
+ //function should take in a nestedArray and a result (array)
+_.flatten = function(nestedArray, result){
+  //if a result (empty array) is not passed in as an argument (make your own container)
+  //results container to store elements that are not an array
+  result = result || [];
+  //iterate through the nestedArray
+  for(var i = 0; i < nestedArray.length; i++){
+    //check to see if the element at a certain index is an array
+    if(Array.isArray(nestedArray[i])){
+      //if it is call flatten again with the element at that index (array), and the current result container
+      _.flatten(nestedArray[i], result);
+    //if it is not
+    }else{
+        //push that element into the results container
+        result.push(nestedArray[i]);
+    }
+  }
+  //return the results container
+  return result;
+};
+
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
